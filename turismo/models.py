@@ -11,10 +11,13 @@ class Regione(models.Model): #creacion de la tabla region
     # Create your models here.
 
 class Turista(models.Model):#creacion de tabla turista
-    Run = models.TextField()
+    Run = models.CharField(max_length=10)
     Nombre = models.CharField(max_length=100)
     Telefono = models.CharField(max_length=10)
     Email = models.EmailField()
+
+    def __str__(self):
+        return self.Run
     
 
 opciones_consultas = [
