@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Regione, Turista
-from .form import ContactoForm
+from .form import ContactoForm, RegionForm
 # Create your views here.
 def index(request):#muestra pagina inicial
     
@@ -27,3 +27,16 @@ def Contacto(request):
         else:
             data["form"] = formulario
     return render(request, 'turismo/Contacto.html', data)
+
+def agregar_region(request):
+    data = {
+        'form': RegionForm()
+    }
+    if request.method == 'POST':
+        formulario = RegionForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "region agregada"
+        else:
+            data["form"] = formulario
+    return render(request, 'turismo/region/agregar.html', data)
