@@ -3,6 +3,7 @@ from .models import Regiones, Turista
 from .form import ContactoForm, RegionForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 def index(request):#muestra pagina inicial
@@ -42,7 +43,7 @@ def Contacto(request):
         else:
             data["form"] = formulario
     return render(request, 'turismo/Contacto.html', data)
-
+@permission_required('turismo.add_regiones')
 def agregar_region(request):
     data = {
         'form': RegionForm()
@@ -55,14 +56,14 @@ def agregar_region(request):
         else:
             data["form"] = formulario
     return render(request, 'turismo/region/agregar.html', data)
-
+@permission_required('turismo.view_regiones')
 def listar_region(request):
     regions = Regiones.objects.all()
     data = {
         'regions' : regions
     }
     return render(request, 'turismo/region/listar.html', data)
-
+@permission_required('turismo.change_regiones')
 def modificar_region(request, id):
     region = get_object_or_404(Regiones, id_region=id)
 
@@ -76,7 +77,7 @@ def modificar_region(request, id):
             return redirect(to="listar-region")
         data["form"] = formulario
     return render(request, 'turismo/region/modificar.html', data)
-
+@permission_required('turismo.delete_regiones')
 def eliminar_region(request, id):
     region = get_object_or_404(Regiones, id_region=id)
     region.delete()
