@@ -1,11 +1,12 @@
 {% extends 'turismo/base.html' %}
 {% block contenido %}
+{% load crispy_forms_tags %}
 <h2>Contactanos</h2>
 <form action="" class="formulario_contacto" method="POST">
     
     {% csrf_token %} 
 
-    {{form}}
+    {{ form | crispy }}
     
     
 
