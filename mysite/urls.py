@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),#url panerl de administracion
     path('', include('turismo.urls')),#colocando paguina inical
-   
+    path('accounts/', include('django.contrib.auth.urls')), 
 ]
