@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Regione(models.Model): #creacion de la tabla region
+class Regiones(models.Model): #creacion de la tabla region
     id_region = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=200)
 
