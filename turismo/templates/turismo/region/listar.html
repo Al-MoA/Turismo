@@ -1,0 +1,16 @@
+{% extends 'turismo/base.html' %}
+
+{% block contenido %}
+    <table>
+        <tr>
+            <th>Id_region</th>
+            <th>Nombre</th>
+        </tr>
+        {% for p in region %}
+        <tr>
+            <td>{{p.Id_region}} </td>
+            <td>{{p.Nombre}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

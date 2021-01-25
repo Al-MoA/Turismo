@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .models import Regione, Turista
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Regiones, Turista
 from .form import ContactoForm, RegionForm
+
 # Create your views here.
 def index(request):#muestra pagina inicial
     
@@ -40,3 +41,24 @@ def agregar_region(request):
         else:
             data["form"] = formulario
     return render(request, 'turismo/region/agregar.html', data)
+
+def listar_region(request):
+    region = Regiones.objects.all()
+    data = {
+        'region' : region
+    }
+    return render(request, 'turismo/region/listar.html', data)
+
+def modificar_region(request, id):
+    region = get_object_or_404(Regiones, id=id)
+
+    data = {
+        'form' : RegionForm(instance=region)
+    }
+    if request.method == 'POST':
+        formulario = RegionForm(data=request.POST, instance=region)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listar-region")
+        data["form"] = formulario
+    return render(request, 'turismo/region/modificar.html', data)
