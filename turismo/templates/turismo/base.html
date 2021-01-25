@@ -62,9 +62,28 @@
         <!--redireccionar a la pagina de registro-->
         <a href="{% url 'index' %}">Pagina Principal</a>
             <a href="{% url 'Lugar1' %}">Primer Destino</a>
-            <a href="{% url 'Registro' %}">Registrate</a>
-            <a href="{% url 'IniciarSesion' %}">Iniciar Sesion</a>
             <a href="{% url 'Contacto' %}">Contacto</a>
+            {% if perms.turismo.add_regiones %}
+                <a href="{% url 'agregar-region'%}">Agregar Region</a>
+            {% endif %}
+
+            {% if perms.turismo.view_regiones %}
+                <a href="{% url 'listar-region'%}">Listado Region</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            
+                <a href="{% url 'logout' %}">Cerrar Sesion</a>
+           
+            
+              
+            
+            {%else%}
+           
+                <a href="{% url 'login'%}"> Inciar Sesion</a>
+                <a href="{% url 'Registro'%}">Registrate</a>
+
+            {%endif%}
         </nav>
     </div>
 </footer>
