@@ -43,14 +43,14 @@ def agregar_region(request):
     return render(request, 'turismo/region/agregar.html', data)
 
 def listar_region(request):
-    region = Regiones.objects.all()
+    regions = Regiones.objects.all()
     data = {
-        'region' : region
+        'regions' : regions
     }
     return render(request, 'turismo/region/listar.html', data)
 
 def modificar_region(request, id):
-    region = get_object_or_404(Regiones, id=id)
+    region = get_object_or_404(Regiones, id_region=id)
 
     data = {
         'form' : RegionForm(instance=region)
@@ -62,3 +62,8 @@ def modificar_region(request, id):
             return redirect(to="listar-region")
         data["form"] = formulario
     return render(request, 'turismo/region/modificar.html', data)
+
+def eliminar_region(request, id):
+    region = get_object_or_404(Regiones, id_region=id)
+    region.delete()
+    return redirect(to="listar-region")
