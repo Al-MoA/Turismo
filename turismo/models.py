@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Regiones(models.Model): #creacion de la tabla region
-    id_region = models.IntegerField(primary_key=True)
+    id_region = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=200)
 
     def __str__(self): #valor principal que muestra en la tabla region
