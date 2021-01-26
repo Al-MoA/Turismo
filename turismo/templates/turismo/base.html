@@ -20,13 +20,30 @@
    
     <div>
         <nav id=header class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <a href="{% url 'index' %}">Pagina Principal</a>
+            <a href="{% url 'index' %}">Página Principal</a>
             <a href="{% url 'Lugar1' %}">Primer Destino</a>
-            <a href="{% url 'Registro' %}">Registrate</a>
-            <a href="{% url 'IniciarSesion' %}">Iniciar Sesion</a>
             <a href="{% url 'Contacto' %}">Contacto</a>
-            <a href="{% url 'agregar-region'%}">Agregar Region</a>
-            <a href="{% url 'listar-region'%}">Listado Region</a>
+            {% if perms.turismo.add_regiones %}
+                <a href="{% url 'agregar-region'%}">Agregar Región</a>
+            {% endif %}
+
+            {% if perms.turismo.view_regiones %}
+                <a href="{% url 'listar-region'%}">Listado Región</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+           
+            
+                <h3>username: {{ user.username }}</h3>
+            
+            {%else%}
+           
+                <a href="{% url 'login'%}"> Inciar Sesión</a>
+                <a href="{% url 'Registro'%}">Regístrate</a>
+
+            {%endif%}
         </nav>
     </div>
     
@@ -43,11 +60,30 @@
         <!--mensaje informativo-->
         <p> <em> Imagenes utilizadas con propositos educacionales, no somos dueños de ellas</em></p>
         <!--redireccionar a la pagina de registro-->
-        <a href="{% url 'index' %}">Pagina Principal</a>
+        <a href="{% url 'index' %}">Página Principal</a>
             <a href="{% url 'Lugar1' %}">Primer Destino</a>
-            <a href="{% url 'Registro' %}">Registrate</a>
-            <a href="{% url 'IniciarSesion' %}">Iniciar Sesion</a>
             <a href="{% url 'Contacto' %}">Contacto</a>
+            {% if perms.turismo.add_regiones %}
+                <a href="{% url 'agregar-region'%}">Agregar Región</a>
+            {% endif %}
+
+            {% if perms.turismo.view_regiones %}
+                <a href="{% url 'listar-region'%}">Listado Región</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+           
+            
+              
+            
+            {%else%}
+           
+                <a href="{% url 'login'%}"> Inciar Sesión</a>
+                <a href="{% url 'Registro'%}">Regístrate</a>
+
+            {%endif%}
         </nav>
     </div>
 </footer>

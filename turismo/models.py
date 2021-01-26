@@ -35,3 +35,6 @@ class Contacto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Carrucel(models.Model):
+    imagen = models.ImageField(upload_to="imagenes") 
